@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet, Pressable } from "react-native";
+import { FontAwesome } from '@expo/vector-icons';
 
 function ListItem(props) {
   return (
@@ -14,7 +15,7 @@ function ListItem(props) {
       </Pressable>
       <Text style={styles.textItem}>{props.text}</Text>
       <Pressable onPress={() => props.deleteItem(props.id)}>
-        <Text>Delete</Text>
+        <FontAwesome name="trash" size={24} color="red" />
       </Pressable>
     </View>
   );

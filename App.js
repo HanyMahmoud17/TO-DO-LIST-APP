@@ -1,5 +1,15 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import { useState } from "react";
+import {
+  StyleSheet,
+  View,
+  TextInput,
+  Button,
+  FlatList,
+  Modal,
+  Image,
+  TouchableOpacity,
+} from "react-native";
+import ListItem from "./components/ListItem";
 
 export default function App() {
   const [enterTaskText, setEnterTaskText] = useState("");
