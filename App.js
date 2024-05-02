@@ -81,7 +81,9 @@ export default function App() {
         </View>
       </Modal>
 
-      <Button title="Enter Your Task" onPress={openModel} />
+      <View style={styles.mainBtn}>
+        <Button title="Enter Your Task" onPress={openModel} />
+      </View>
       <FlatList
         data={myTasks}
         renderItem={({ item }) => {
@@ -109,7 +111,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 58,
-    backgroundColor: "#ccc",
+    // backgroundColor: "#ccc",
   },
   NotesArea: {
     marginTop: 8,
@@ -140,6 +142,11 @@ const styles = StyleSheet.create({
   btnContainer: {
     flexDirection: "row",
     justifyContent: "space-around",
-    marginTop: 10,
+    marginTop: 20,
+    borderRadius: 8,
+  },
+  mainBtn: {
+    borderRadius: 8,
+    overflow: 'hidden',
   },
 });
