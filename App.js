@@ -65,7 +65,7 @@ export default function App() {
           <View style={styles.imageContainer}>
             <Image
               style={styles.image}
-              source={require("./assets/favicon.png")}
+              source={require("./assets/Target.jpg")}
             />
           </View>
           <TextInput
@@ -81,6 +81,12 @@ export default function App() {
         </View>
       </Modal>
 
+      <View style={styles.listImageContainer}>
+            <Image
+              style={styles.listImage}
+              source={require("./assets/taskList.jpeg")}
+            />
+          </View>
       <View style={styles.mainBtn}>
         <Button title="Enter Your Task" onPress={openModel} />
       </View>
@@ -128,11 +134,22 @@ const styles = StyleSheet.create({
   imageContainer: {
     flexDirection: "row",
     justifyContent: "center",
-    marginBottom: 24,
+    marginBottom: 5,
   },
   image: {
-    width: 120,
-    height: 120,
+    width: 170,
+    height: 170,
+  },
+  listImageContainer:{
+    flexDirection: "row",
+    justifyContent: "center",
+    marginBottom: 8,
+  },
+  listImage:{
+    width: 330,
+    height: 150,
+    resizeMode: "cover",
+    borderRadius:20
   },
   InputText: {
     borderWidth: 1,

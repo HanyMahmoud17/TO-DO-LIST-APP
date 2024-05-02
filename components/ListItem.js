@@ -1,8 +1,20 @@
 import React from "react";
 import { View, Text, StyleSheet, Pressable } from "react-native";
 import { FontAwesome } from '@expo/vector-icons';
-
+import AlertAsync from "react-native-alert-async";
 function ListItem(props) {
+  const showDeleteConfirmation = async () => {
+    const response = await AlertAsync(
+      'Delete Task',
+      'Are you sure you want to delete this task?',
+      [
+        { text: 'Cancel', onPress: () => console.log('Cancel pressed'), style: 'cancel' },
+        { text: 'OK', onPress: () => props.deleteItem(props.id) },
+      ],
+      { cancelable: true }
+    );
+  };
+
   return (
     <View style={styles.container}>
       <Pressable onPress={() => props.toggleCompletion(props.id)}>
@@ -14,7 +26,7 @@ function ListItem(props) {
         />
       </Pressable>
       <Text style={styles.textItem}>{props.text}</Text>
-      <Pressable onPress={() => props.deleteItem(props.id)}>
+      <Pressable onPress={showDeleteConfirmation}>
         <FontAwesome name="trash" size={24} color="#f31282" />
       </Pressable>
     </View>
@@ -22,15 +34,17 @@ function ListItem(props) {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginVertical: 8,
-    backgroundColor: "#5e0acc",
-    paddingHorizontal:8,
-    paddingVertical: 8,
-    borderRadius: 8,
-    overflow: 'hidden',
+
+    container: {
+      flexDirection: "row",
+      alignItems: "center",
+      marginVertical: 8,
+      backgroundColor: "#5e0acc",
+      paddingHorizontal: 16,
+      paddingVertical: 12,
+      borderRadius: 8,
+      overflow: 'hidden',
+      elevation: 1,
   },
   square: {
     width: 20,
@@ -38,6 +52,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "white",
     marginRight: 10,
+    borderRadius: 4,
     overflow: 'hidden',
   },
   completedSquare: {
@@ -46,6 +61,10 @@ const styles = StyleSheet.create({
   textItem: {
     flex: 1,
     color: "white",
+    fontSize: 16,
+  },
+  deleteButton: {
+    marginLeft: 16,
   },
 });
 
