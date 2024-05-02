@@ -4,7 +4,7 @@ import { View, Text, StyleSheet, Pressable } from "react-native";
 function ListItem(props) {
   return (
     <View style={styles.container}>
-      <Pressable >
+      <Pressable onPress={() => props.toggleCompletion(props.id)}>
         <View
           style={[
             styles.square,

@@ -37,6 +37,17 @@ export default function App() {
     });
   }
 
+  function toggleCompletion(id) {
+    setmyTasks((currentmyTasks) => {
+      return currentmyTasks.map((task) => {
+        if (task.id === id) {
+          return { ...task, completed: !task.completed };
+        }
+        return task;
+      });
+    });
+  }
+
   return (
     <View style={styles.container}>
       <Modal visible={modelIsVisible} animationType="slide">
@@ -69,6 +80,7 @@ export default function App() {
               text={item.text}
               id={item.id}
               deleteItem={deleteItem}
+              toggleCompletion={toggleCompletion}
               completed={item.completed}
             />
           );
