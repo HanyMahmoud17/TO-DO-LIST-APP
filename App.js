@@ -2,6 +2,28 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 
 export default function App() {
+
+  const [enterTaskText, setEnterTaskText] = useState("");
+  const [modelIsVisible, setModelIsVisible] = useState(false);
+
+  function openModel() {
+    setModelIsVisible(true);
+  }
+
+  function closeModel() {
+    setModelIsVisible(false);
+  }
+
+  function taskInputHandler(enterValue) {
+    setEnterTaskText(enterValue);
+  }
+
+
+  function addTaskHandler(){
+    
+  }
+
+
   return (
     <View style={styles.container}>
       <Modal visible={modelIsVisible} animationType="slide">
