@@ -35,8 +35,35 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    padding: 58,
+    backgroundColor: "#ccc",
+  },
+  form: {
+    flex: 1,
+    justifyContent: "center",
+    margin: 24,
+    alignContent: "center",
+    borderBottomWidth: 2,
+    borderBottomColor: "#cccccc",
+    paddingBottom: 16,
+  },
+  imageContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    marginBottom: 24,
+  },
+  image: {
+    width: 120,
+    height: 120,
+  },
+  InputText: {
+    borderWidth: 1,
+    borderColor: "#cccccc",
+    padding: 8,
+  },
+  btnContainer: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    marginTop: 10,
   },
 });
