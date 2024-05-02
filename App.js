@@ -4,6 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 export default function App() {
 
   const [enterTaskText, setEnterTaskText] = useState("");
+  const [courseTasks, setCourseTasks] = useState([]);
   const [modelIsVisible, setModelIsVisible] = useState(false);
 
   function openModel() {
@@ -20,7 +21,15 @@ export default function App() {
 
 
   function addTaskHandler(){
-    
+    setCourseTasks((currentCourseTasks) => [
+      ...currentCourseTasks,
+      {
+        text: enterTaskText,
+        id: Math.random().toString(),
+      },
+    ]);
+    setEnterTaskText("");
+    setModelIsVisible(false);
   }
 
 
@@ -50,6 +59,18 @@ export default function App() {
           </View>
         </View>
       </Modal>
+
+      <Button title="Enter Your Task" onPress={openModel} />
+      <FlatList
+        data={courseTasks}
+        renderItem={({ item }) => {
+          return (
+            <ListItem  text={item.text} id={item.id}/>
+          );
+        }}
+        style={styles.NotesArea}
+        alwaysBounceHorizontal={false}
+      />
     </View>
   );
 }
@@ -59,6 +80,9 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 58,
     backgroundColor: "#ccc",
+  },
+  NotesArea: {
+    marginTop: 8,
   },
   form: {
     flex: 1,
