@@ -7,12 +7,13 @@ function ListItem(props) {
       <Pressable >
         <View
           style={[
-            styles.square
+            styles.square,
+            props.completed && styles.completedSquare
           ]}
         />
       </Pressable>
       <Text style={styles.textItem}>{props.text}</Text>
-      <Pressable >
+      <Pressable onPress={() => props.deleteItem(props.id)}>
         <Text>Delete</Text>
       </Pressable>
     </View>
@@ -31,6 +32,9 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#000",
     marginRight: 10,
+  },
+  completedSquare: {
+    backgroundColor: "black",
   },
   textItem: {
     flex: 1,

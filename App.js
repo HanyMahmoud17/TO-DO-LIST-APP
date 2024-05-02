@@ -1,10 +1,9 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar } from "expo-status-bar";
+import { StyleSheet, Text, View } from "react-native";
 
 export default function App() {
-
   const [enterTaskText, setEnterTaskText] = useState("");
-  const [courseTasks, setCourseTasks] = useState([]);
+  const [myTasks, setmyTasks] = useState([]);
   const [modelIsVisible, setModelIsVisible] = useState(false);
 
   function openModel() {
@@ -19,19 +18,24 @@ export default function App() {
     setEnterTaskText(enterValue);
   }
 
-
-  function addTaskHandler(){
-    setCourseTasks((currentCourseTasks) => [
-      ...currentCourseTasks,
+  function addTaskHandler() {
+    setmyTasks((currentmyTasks) => [
+      ...currentmyTasks,
       {
         text: enterTaskText,
         id: Math.random().toString(),
+        completed: false,
       },
     ]);
     setEnterTaskText("");
     setModelIsVisible(false);
   }
 
+  function deleteItem(id) {
+    setmyTasks((currentmyTasks) => {
+      return currentmyTasks.filter((task) => task.id !== id);
+    });
+  }
 
   return (
     <View style={styles.container}>
@@ -50,11 +54,7 @@ export default function App() {
             value={enterTaskText}
           />
           <View style={styles.btnContainer}>
-            <Button
-              title="Add Task"
-              onPress={addTaskHandler}
-              color="#5e0acc"
-            />
+            <Button title="Add Task" onPress={addTaskHandler} color="#5e0acc" />
             <Button title="Cancel" onPress={closeModel} color="#f31282" />
           </View>
         </View>
@@ -62,13 +62,21 @@ export default function App() {
 
       <Button title="Enter Your Task" onPress={openModel} />
       <FlatList
-        data={courseTasks}
+        data={myTasks}
         renderItem={({ item }) => {
           return (
-            <ListItem  text={item.text} id={item.id}/>
+            <ListItem
+              text={item.text}
+              id={item.id}
+              deleteItem={deleteItem}
+              completed={item.completed}
+            />
           );
         }}
         style={styles.NotesArea}
+        keyExtractor={(item, index) => {
+          return item.id;
+        }}
         alwaysBounceHorizontal={false}
       />
     </View>
