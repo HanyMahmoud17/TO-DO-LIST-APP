@@ -1,3 +1,4 @@
+import { StatusBar } from "react-native";
 import { useState } from "react";
 import {
   StyleSheet,
@@ -10,6 +11,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import ListItem from "./components/ListItem";
+import { Colors } from "./constants/colors";
 
 export default function App() {
   const [enterTaskText, setEnterTaskText] = useState("");
@@ -59,64 +61,75 @@ export default function App() {
   }
 
   return (
-    <View style={styles.container}>
-      <Modal visible={modelIsVisible} animationType="slide">
-        <View style={styles.form}>
-          <View style={styles.imageContainer}>
-            <Image
-              style={styles.image}
-              source={require("./assets/Target.jpg")}
+    <>
+      <StatusBar barStyle="light-content" />
+      <View style={styles.container}>
+        <Modal visible={modelIsVisible} animationType="slide">
+          <View style={styles.form}>
+            <View style={styles.imageContainer}>
+              <Image
+                style={styles.image}
+                source={require("./assets/Target.jpg")}
+              />
+            </View>
+            <TextInput
+              style={styles.InputText}
+              placeholder="enter your task message"
+              onChangeText={taskInputHandler}
+              value={enterTaskText}
             />
+            <View style={styles.btnContainer}>
+              <Button
+                title="Add Task"
+                onPress={addTaskHandler}
+                color={Colors.primary50}
+              />
+              <Button
+                title="Cancel"
+                onPress={closeModel}
+                color={Colors.warning50}
+              />
+            </View>
           </View>
-          <TextInput
-            style={styles.InputText}
-            placeholder="enter your task message"
-            onChangeText={taskInputHandler}
-            value={enterTaskText}
-          />
-          <View style={styles.btnContainer}>
-            <Button title="Add Task" onPress={addTaskHandler} color="#5e0acc" />
-            <Button title="Cancel" onPress={closeModel} color="#f31282" />
-          </View>
-        </View>
-      </Modal>
+        </Modal>
 
-      <View style={styles.listImageContainer}>
-            <Image
-              style={styles.listImage}
-              source={require("./assets/taskList.jpeg")}
-            />
-          </View>
-      <View style={styles.mainBtn}>
-        <Button title="Enter Your Task" onPress={openModel} />
+        <View style={styles.listImageContainer}>
+          <Image
+            style={styles.listImage}
+            source={require("./assets/taskList.jpeg")}
+          />
+        </View>
+        <View style={styles.mainBtn}>
+          <Button title="Enter Your Task" onPress={openModel} />
+        </View>
+        <FlatList
+          data={myTasks}
+          renderItem={({ item }) => {
+            return (
+              <ListItem
+                text={item.text}
+                id={item.id}
+                deleteItem={deleteItem}
+                toggleCompletion={toggleCompletion}
+                completed={item.completed}
+              />
+            );
+          }}
+          style={styles.NotesArea}
+          keyExtractor={(item, index) => {
+            return item.id;
+          }}
+          alwaysBounceHorizontal={false}
+        />
       </View>
-      <FlatList
-        data={myTasks}
-        renderItem={({ item }) => {
-          return (
-            <ListItem
-              text={item.text}
-              id={item.id}
-              deleteItem={deleteItem}
-              toggleCompletion={toggleCompletion}
-              completed={item.completed}
-            />
-          );
-        }}
-        style={styles.NotesArea}
-        keyExtractor={(item, index) => {
-          return item.id;
-        }}
-        alwaysBounceHorizontal={false}
-      />
-    </View>
+    </>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 58,
+    padding: 20,
     // backgroundColor: "#ccc",
   },
   NotesArea: {
@@ -128,7 +141,7 @@ const styles = StyleSheet.create({
     margin: 24,
     alignContent: "center",
     borderBottomWidth: 2,
-    borderBottomColor: "#cccccc",
+    borderBottomColor: Colors.border50,
     paddingBottom: 16,
   },
   imageContainer: {
@@ -140,20 +153,20 @@ const styles = StyleSheet.create({
     width: 170,
     height: 170,
   },
-  listImageContainer:{
+  listImageContainer: {
     flexDirection: "row",
     justifyContent: "center",
     marginBottom: 8,
   },
-  listImage:{
+  listImage: {
     width: 330,
     height: 150,
     resizeMode: "cover",
-    borderRadius:20
+    borderRadius: 20,
   },
   InputText: {
     borderWidth: 1,
-    borderColor: "#cccccc",
+    borderColor: Colors.border50,
     padding: 8,
   },
   btnContainer: {
@@ -164,6 +177,6 @@ const styles = StyleSheet.create({
   },
   mainBtn: {
     borderRadius: 8,
-    overflow: 'hidden',
+    overflow: "hidden",
   },
 });

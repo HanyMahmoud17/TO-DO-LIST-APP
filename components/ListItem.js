@@ -2,6 +2,8 @@ import React from "react";
 import { View, Text, StyleSheet, Pressable } from "react-native";
 import { FontAwesome } from '@expo/vector-icons';
 import AlertAsync from "react-native-alert-async";
+import { Colors } from '../constants/colors'
+
 function ListItem(props) {
   const showDeleteConfirmation = async () => {
     const response = await AlertAsync(
@@ -27,7 +29,7 @@ function ListItem(props) {
       </Pressable>
       <Text style={styles.textItem}>{props.text}</Text>
       <Pressable onPress={showDeleteConfirmation}>
-        <FontAwesome name="trash" size={24} color="#f31282" />
+        <FontAwesome name="trash" size={24} color={Colors.warning50} />
       </Pressable>
     </View>
   );
@@ -39,9 +41,9 @@ const styles = StyleSheet.create({
       flexDirection: "row",
       alignItems: "center",
       marginVertical: 8,
-      backgroundColor: "#5e0acc",
-      paddingHorizontal: 16,
-      paddingVertical: 12,
+      backgroundColor: Colors.primary50,
+      paddingHorizontal: 12,
+      paddingVertical: 10,
       borderRadius: 8,
       overflow: 'hidden',
       elevation: 1,
@@ -54,6 +56,7 @@ const styles = StyleSheet.create({
     marginRight: 10,
     borderRadius: 4,
     overflow: 'hidden',
+    backgroundColor:'white'
   },
   completedSquare: {
     backgroundColor: "black",
